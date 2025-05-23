@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario 900 - Declaración Jurada del IDSP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f7f7f7;
+      color: #333;
+    }
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .form-section {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: #fafafa;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .radio-group label {
+      font-weight: normal;
+    }
+    .submit-button {
+      text-align: center;
+      margin-top: 20px;
+    }
+    button {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+  <script>
+    function calcularImpuesto() {
+      var baseImponible = parseFloat(document.getElementById("base_imponible").value) || 0;
+      var alicuota = parseFloat(document.getElementById("alicuota").value) || 0;
+      var monto = baseImponible * (alicuota / 100);
+      document.getElementById("monto_a_pagar").value = monto.toFixed(2);
+    }
+  </script>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Formulario 900</h1>
+    <p style="text-align: center;"><strong>Declaración Jurada del IDSP</strong><br>
+      Impuesto Digital sobre Servicios de Streaming y Plataformas Internacionales (IDSP)
+    </p>
+    <form action="http://www.tu-sitio-web.com/submit_form" method="POST">
+      
+      <!-- Datos Generales -->
+      <div class="form-section">
+        <h2>Datos Generales</h2>
+        <div class="form-group">
+          <label for="periodo_fiscal">Periodo Fiscal (Ej. Abril 2026):</label>
+          <input type="text" id="periodo_fiscal" name="periodo_fiscal" required>
+        </div>
+        <div class="form-group">
+          <label>Tipo de Declaración:</label>
+          <div class="radio-group">
+            <label><input type="radio" name="tipo_declaracion" value="Original" checked> Original</label>
+            <label><input type="radio" name="tipo_declaracion" value="Rectificatoria"> Rectificatoria</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="numero_rectificatoria">Número de Rectificatoria:</label>
+          <input type="text" id="numero_rectificatoria" name="numero_rectificatoria">
+        </div>
+      </div>
+      
+      <!-- I. Identificación de la Plataforma Digital -->
+      <div class="form-section">
+        <h2>I. Identificación de la Plataforma Digital</h2>
+        <div class="form-group">
+          <label for="nombre_comercial">1. Nombre Comercial de la Plataforma:</label>
+          <input type="text" id="nombre_comercial" name="nombre_comercial" required>
+        </div>
+        <div class="form-group">
+          <label for="razon_social">2. Nombre Legal o Razón Social:</label>
+          <input type="text" id="razon_social" name="razon_social" required>
+        </div>
+        <div class="form-group">
+          <label for="pais">3. País de Origen:</label>
+          <input type="text" id="pais" name="pais" required>
+        </div>
+        <div class="form-group">
+          <label for="nif">4. Número de Identificación Fiscal Extranjera (si aplica):</label>
+          <input type="text" id="nif" name="nif">
+        </div>
+        <div class="form-group">
+          <label for="sitio_web">5. Dirección Electrónica del Sitio Web o Aplicación:</label>
+          <input type="text" id="sitio_web" name="sitio_web" required>
+        </div>
+        <div class="form-group">
+          <label for="representante">6. Representante Legal en Bolivia (Nombre y C.I./NIT):</label>
+          <input type="text" id="representante" name="representante" required>
+        </div>
+      </div>
+      
+      <!-- II. Determinación del Impuesto -->
+      <div class="form-section">
+        <h2>II. Determinación del Impuesto</h2>
+        <div class="form-group">
+          <label for="ingresos_brutos">A. Ingresos Brutos Obtenidos en Bolivia (Bs):</label>
+          <input type="number" step="any" id="ingresos_brutos" name="ingresos_brutos">
+        </div>
+        <div class="form-group">
+          <label for="base_imponible">B. Base Imponible del IDSP (Bs):</label>
+          <input type="number" step="any" id="base_imponible" name="base_imponible" oninput="calcularImpuesto()" required>
+        </div>
+        <div class="form-group">
+          <label for="alicuota">C. Alícuota Aplicable (%):</label>
+          <input type="number" step="any" id="alicuota" name="alicuota" value="10" oninput="calcularImpuesto()" required>
+        </div>
+        <div class="form-group">
+          <label for="monto_a_pagar">D. Monto del IDSP a Pagar (Bs):</label>
+          <input type="number" step="any" id="monto_a_pagar" name="monto_a_pagar" readonly>
+        </div>
+      </div>
+      
+      <!-- III. Información del Pago -->
+      <div class="form-section">
+        <h2>III. Información del Pago</h2>
+        <div class="form-group">
+          <label>Medio de Pago:</label>
+          <div class="radio-group">
+            <label><input type="radio" name="medio_pago" value="Retención" checked> Retención por Entidad Financiera</label>
+            <label><input type="radio" name="medio_pago" value="Transferencia"> Pago Directo por Transferencia</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="banco">Banco o Entidad Financiera:</label>
+          <input type="text" id="banco" name="banco">
+        </div>
+        <div class="form-group">
+          <label for="numero_operacion">Número de Operación o Referencia:</label>
+          <input type="text" id="numero_operacion" name="numero_operacion">
+        </div>
+        <div class="form-group">
+          <label for="fecha_pago">Fecha del Pago:</label>
+          <input type="date" id="fecha_pago" name="fecha_pago">
+        </div>
+      </div>
+      
+      <!-- IV. Declaración Jurada -->
+      <div class="form-section">
+        <h2>IV. Declaración Jurada</h2>
+        <p>Declaro bajo juramento que la información proporcionada en este formulario es veraz, completa y se ajusta a lo establecido por la Ley del Impuesto Digital sobre Servicios de Streaming y Plataformas Internacionales (IDSP).</p>
+        <div class="form-group">
+          <label for="firma">Firma del Declarante:</label>
+          <input type="text" id="firma" name="firma" required>
+        </div>
+        <div class="form-group">
+          <label for="lugar_fecha">Lugar y Fecha:</label>
+          <input type="text" id="lugar_fecha" name="lugar_fecha" placeholder="Ej: Cochabamba, 23/05/2025" required>
+        </div>
+      </div>
+      
+      <div class="submit-button">
+        <button type="submit">Enviar Formulario</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
